@@ -23,20 +23,23 @@ public class EvilBankApp {
 	public static void main(String[] args){
 		EvilBankApp aBank = new EvilBankApp();
 		boolean acctLoop=true, transLoop=true;
-		String acctNum="";
+		String acctNum="", acctName = "";
 		Scanner keyboard=new Scanner(System.in);
 		System.out.println("Welcome to Evil Bank!\nPlease create the user account(s)");
 		//create accounts 
 		while(acctLoop){
 			Account acct= new Account();
-			System.out.println("Enter account # or -1 to stop entering accounts: ");
-			acctNum=keyboard.next();		
+//			System.out.println("Enter account # or -1 to stop entering accounts: ");
+			acctNum =Validator.getString(keyboard, "Enter account # or -1 to stop entering accounts: ");
+//			acctNum=keyboard.next();		
 			if (acctNum.equals("-1")){
 				acctLoop = false;
 			} else {
 				acct.setAcctNo(acctNum);
-				System.out.println("Enter the name for acct # "+acctNum+": ");
-				acct.setAcctName(keyboard.next());
+//				System.out.println("Enter the name for acct # "+acctNum+": ");
+				acctName =Validator.getString(keyboard, "Enter the name for acct # "+acctNum+":  or -1 to stop entering accounts: ");
+	//			acct.setAcctName(keyboard.next());
+				acct.setAcctName(acctName);
 				System.out.println("Enter the balance for acct # "+acctNum+": ");
 				acct.setAcctBalance(keyboard.nextInt());
 				aBank.bankAssets.getAcctList().add(acct);
@@ -50,7 +53,7 @@ public class EvilBankApp {
 		Account theAcct = new Account();
 		while(transLoop){
 			acctExist = false;
-			System.out.println("Enter a transaction type(Check, Debit Card, Deposit, or Withdrawal) or -1 to finish: ");
+			System.out.println("Enter a transaction type(Check, Debit, Deposit, or Withdrawal) or -1 to finish: ");
 			ltype=keyboard.next();
 			if (ltype.equals("-1")) break;
 			System.out.println("Enter the account #: ");

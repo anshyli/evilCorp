@@ -86,7 +86,7 @@ public class Account {
 	public void processTrans(Transaction trans){
 		switch(trans.getType()){
 		case "Check": {
-			System.out.println("YOur balance before Check: " + formatDollar(acctBalance));
+			System.out.println("Your balance before Check: " + formatDollar(acctBalance));
 			acctBalance-=trans.getChangeAmt();
 			if (acctBalance<0.0){
 				chargeBalance+=fee;
@@ -95,7 +95,7 @@ public class Account {
 			System.out.println("Balance after Check: " + formatDollar(acctBalance));
 		}break;
 		case "Debit":{
-			System.out.println("YOur balance before Debit: " + formatDollar(acctBalance));
+			System.out.println("Your balance before Debit: " + formatDollar(acctBalance));
 			acctBalance-=trans.getChangeAmt();
 			if (acctBalance<0.0){
 				chargeBalance+=fee;
@@ -105,18 +105,20 @@ public class Account {
 			
 		}break;
 		case "Deposit":{
-			System.out.println("YOur balance before Deposit: " + formatDollar(acctBalance));
+			System.out.println("Your balance before Deposit: " + formatDollar(acctBalance));
 			acctBalance+=trans.getChangeAmt();
 			System.out.println("Balance after Deposit: " + formatDollar(acctBalance));
 
 		}break;
 		case "Withdrawl":{
-			System.out.println("YOur balance before Withdrawl: " + formatDollar(acctBalance));
+			System.out.println("Your balance before Withdrawl: " + formatDollar(acctBalance));
 			if (trans.getChangeAmt()>acctBalance) System.out.println("Insufficient funds! Withdrawl declined.");
 			else acctBalance-=trans.getChangeAmt();
 			System.out.println("Balance after Withdrawl: " + formatDollar(acctBalance));
-
-		}		
+		}break;
+		default: {
+			System.out.println("Invalid Transaction Type. Transaction ignored.");
+		}
 		}
 	}
 	
